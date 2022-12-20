@@ -91,19 +91,24 @@
                   type='number'
                   name='amount'
                   class='form-control'
-                  placeholder='Cost'
+                  placeholder='Amount'
                   required='required'
                 />
               </div>
 
               <div class='form-group'>
-                <input
-                  type='number'
-                  name='wasBought'
-                  class='form-control'
-                  placeholder='Amount'
-                  required='required'
-                />
+                <div class='form-check'>
+                  <input
+                    name='wasBought'
+                    class='form-check-input wasBought'
+                    type='checkbox'
+                    value=''
+                    id='wasBought'
+                  />
+                  <label class='form-check-label' for='wasBought'>
+                    Was bought
+                  </label>
+                </div>
               </div>
             </div>
             <div class='modal-footer'>
@@ -125,7 +130,7 @@
         <div class='modal-dialog' role='document'>
           <div class='modal-content'>
             <div class='modal-header'>
-              <h4 class='modal-title'>Edit Product</h4>
+              <h4 class='modal-title'>Edit product</h4>
               <button type='button' class='close' data-dismiss='modal'>
                 <span>&times;</span>
               </button>
@@ -145,20 +150,25 @@
                 <input
                   type='number'
                   name='amount'
-                  class='form-control'
-                  placeholder='Cost'
+                  class='form-control amount'
+                  placeholder='Amount'
                   required='required'
                 />
               </div>
 
               <div class='form-group'>
-                <input
-                  type='number'
-                  name='wasBought'
-                  class='form-control wasBought'
-                  placeholder='Amount'
-                  required='required'
-                />
+                <div class='form-check'>
+                  <input
+                    name='wasBought'
+                    class='form-check-input wasBought'
+                    type='checkbox'
+                    value=''
+                    id='wasBought2'
+                  />
+                  <label class='form-check-label' for='wasBought2'>
+                    Was bought
+                  </label>
+                </div>
               </div>
             </div>
             <div class='modal-footer'>
@@ -227,9 +237,9 @@
       function () { $('#editproductModal').modal('show');
       $('.product_id').val($(this).data('id'));
       $('.name').val($(this).data('name'));
-      $('.amount').val($(this).data('amount'));
-      $('.wasBought').val($(this).data('wasBought')); }).on('click', '.remove',
-      function () { $('#removeproductModal').modal('show');
+      $('.amount').val($(this).data('amount')); $('.wasBought').prop('checked',
+      $(this).data('wasbought')); }).on('click', '.remove', function () {
+      $('#removeproductModal').modal('show');
       $('.product_id_removal').val($(this).data('id')); }); });
     </script>
   </body>
