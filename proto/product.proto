@@ -1,26 +1,26 @@
 syntax = "proto3";
 
-service CustomerService {
-    rpc GetAll (Empty) returns (CustomerList) {}
-    rpc Get (CustomerRequestId) returns (Customer) {}
-    rpc Insert (Customer) returns (Customer) {}
-    rpc Update (Customer) returns (Customer) {}
-    rpc Remove (CustomerRequestId) returns (Empty) {}
+service ProductService {
+    rpc GetAll (Empty) returns (ProductList) {}
+    rpc Get (ProductRequestId) returns (Product) {}
+    rpc Insert (Product) returns (Product) {}
+    rpc Update (Product) returns (Product) {}
+    rpc Remove (ProductRequestId) returns (Empty) {}
 }
 
 message Empty {}
 
-message Customer {
+message Product {
     string id = 1;
     string name = 2;
-    int32 age = 3;
-    int32 address = 4;
+    int32 amount = 3;
+    bool wasBought = 4;
 }
 
-message CustomerList {
-    repeated Customer customers = 1;
+message ProductList {
+    repeated Product products = 1;
 }
 
-message CustomerRequestId {
+message ProductRequestId {
     string id = 1;
 }

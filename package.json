@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "cd server && node server.js",
-    "client": "cd client && node index.js"
+    "server": "cd server && nodemon server.js",
+    "client": "cd client && nodemon index.js"
   },
   "keywords": [],
   "author": "",
