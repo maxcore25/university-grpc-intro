@@ -10,12 +10,12 @@ var packageDefinition = protoLoader.loadSync(PROTO_PATH, {
   arrays: true,
 });
 
-var customersProto = grpc.loadPackageDefinition(packageDefinition);
+var productsProto = grpc.loadPackageDefinition(packageDefinition);
 
 const { v4: uuidv4 } = require('uuid');
 
 const server = new grpc.Server();
-const customers = [
+const products = [
   {
     id: 'a68b823c-7ca6-44bc-b721-fb4d5312cafc',
     name: 'Bread',
@@ -30,16 +30,16 @@ const customers = [
   },
 ];
 
-server.addService(customersProto.CustomerService.service, {
+server.addService(productsProto.ProductService.service, {
   getAll: (_, callback) => {
-    callback(null, { customers });
+    callback(null, { products: products });
   },
 
   get: (call, callback) => {
-    let customer = customers.find(n => n.id == call.request.id);
+    let product = products.find(n => n.id == call.request.id);
 
-    if (customer) {
-      callback(null, customer);
+    if (product) {
+      callback(null, product);
     } else {
       callback({
         code: grpc.status.NOT_FOUND,
@@ -49,21 +49,21 @@ server.addService(customersProto.CustomerService.service, {
   },
 
   insert: (call, callback) => {
-    let customer = call.request;
+    let product = call.request;
 
-    customer.id = uuidv4();
-    customers.push(customer);
-    callback(null, customer);
+    product.id = uuidv4();
+    products.push(product);
+    callback(null, product);
   },
 
   update: (call, callback) => {
-    let existingCustomer = customers.find(n => n.id == call.request.id);
+    let existingProduct = products.find(n => n.id == call.request.id);
 
-    if (existingCustomer) {
-      existingCustomer.name = call.request.name;
-      existingCustomer.amount = call.request.amount;
-      existingCustomer.wasBought = call.request.wasBought;
-      callback(null, existingCustomer);
+    if (existingProduct) {
+      existingProduct.name = call.request.name;
+      existingProduct.amount = call.request.amount;
+      existingProduct.wasBought = call.request.wasBought;
+      callback(null, existingProduct);
     } else {
       callback({
         code: grpc.status.NOT_FOUND,
@@ -73,12 +73,10 @@ server.addService(customersProto.CustomerService.service, {
   },
 
   remove: (call, callback) => {
-    let existingCustomerIndex = customers.findIndex(
-      n => n.id == call.request.id
-    );
+    let existingProductIndex = products.findIndex(n => n.id == call.request.id);
 
-    if (existingCustomerIndex != -1) {
-      customers.splice(existingCustomerIndex, 1);
+    if (existingProductIndex != -1) {
+      products.splice(existingProductIndex, 1);
       callback(null, {});
     } else {
       callback({
