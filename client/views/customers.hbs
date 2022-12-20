@@ -17,13 +17,13 @@
         <h1>Product Shop (gRPC + Node.js)</h1>
       </div>
 
-      <table class='table' id='customers_table'>
+      <table class='table' id='products_table'>
         <thead>
           <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Cost</th>
             <th>Amount</th>
+            <th>Was bought</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -32,16 +32,16 @@
             <tr>
               <td>{{id}}</td>
               <td>{{name}}</td>
-              <td>{{age}}</td>
-              <td>{{address}}</td>
+              <td>{{amount}}</td>
+              <td>{{wasBought}}</td>
               <td>
                 <a
                   href='javascript:void(0);'
                   class='btn btn-sm edit btn btn-warning'
                   data-id='{{id}}'
                   data-name='{{name}}'
-                  data-age='{{age}}'
-                  data-address='{{address}}'
+                  data-amount='{{amount}}'
+                  data-wasBought='{{wasBought}}'
                 >Edit</a>
                 <a
                   href='javascript:void(0);'
@@ -60,17 +60,17 @@
       <button
         class='btn btn-success float-right'
         data-toggle='modal'
-        data-target='#newCustomerModal'
+        data-target='#newproductModal'
       >Create a new product</button>
     </div>
 
-    <!-- New Customer Modal -->
+    <!-- New Product Modal -->
     <form action='/save' method='post'>
-      <div class='modal fade' id='newCustomerModal' role='dialog'>
+      <div class='modal fade' id='newproductModal' role='dialog'>
         <div class='modal-dialog' role='document'>
           <div class='modal-content'>
             <div class='modal-header'>
-              <h4 class='modal-title'>New Customer</h4>
+              <h4 class='modal-title'>New product</h4>
               <button type='button' class='close' data-dismiss='modal'>
                 <span>&times;</span>
               </button>
@@ -89,7 +89,7 @@
               <div class='form-group'>
                 <input
                   type='number'
-                  name='age'
+                  name='amount'
                   class='form-control'
                   placeholder='Cost'
                   required='required'
@@ -99,7 +99,7 @@
               <div class='form-group'>
                 <input
                   type='number'
-                  name='address'
+                  name='wasBought'
                   class='form-control'
                   placeholder='Amount'
                   required='required'
@@ -119,9 +119,9 @@
       </div>
     </form>
 
-    <!-- Edit Customer Modal -->
+    <!-- Edit Product Modal -->
     <form action='/update' method='post'>
-      <div class='modal fade' id='editCustomerModal' role='dialog'>
+      <div class='modal fade' id='editproductModal' role='dialog'>
         <div class='modal-dialog' role='document'>
           <div class='modal-content'>
             <div class='modal-header'>
@@ -144,8 +144,8 @@
               <div class='form-group'>
                 <input
                   type='number'
-                  name='age'
-                  class='form-control age'
+                  name='amount'
+                  class='form-control'
                   placeholder='Cost'
                   required='required'
                 />
@@ -154,15 +154,15 @@
               <div class='form-group'>
                 <input
                   type='number'
-                  name='address'
-                  class='form-control address'
+                  name='wasBought'
+                  class='form-control wasBought'
                   placeholder='Amount'
                   required='required'
                 />
               </div>
             </div>
             <div class='modal-footer'>
-              <input type='hidden' name='id' class='customer_id' />
+              <input type='hidden' name='id' class='product_id' />
               <button
                 type='button'
                 class='btn btn-outline-secondary'
@@ -175,11 +175,11 @@
       </div>
     </form>
 
-    <!-- Remove Customer Modal -->
+    <!-- Remove Product Modal -->
     <form id='add-row-form' action='/remove' method='post'>
       <div
         class='modal fade'
-        id='removeCustomerModal'
+        id='removeproductModal'
         role='dialog'
         aria-labelledby='myModalLabel'
       >
@@ -196,8 +196,8 @@
             <div class='modal-footer'>
               <input
                 type='hidden'
-                name='customer_id'
-                class='form-control customer_id_removal'
+                name='product_id'
+                class='form-control product_id_removal'
                 required='required'
               />
               <button
@@ -223,13 +223,14 @@
       crossorigin='anonymous'
     ></script>
     <script>
-      $(document).ready(function () { $('#customers_table').on('click', '.edit',
-      function () { $('#editCustomerModal').modal('show');
-      $('.customer_id').val($(this).data('id'));
-      $('.name').val($(this).data('name')); $('.age').val($(this).data('age'));
-      $('.address').val($(this).data('address')); }).on('click', '.remove',
-      function () { $('#removeCustomerModal').modal('show');
-      $('.customer_id_removal').val($(this).data('id')); }); });
+      $(document).ready(function () { $('#products_table').on('click', '.edit',
+      function () { $('#editproductModal').modal('show');
+      $('.product_id').val($(this).data('id'));
+      $('.name').val($(this).data('name'));
+      $('.amount').val($(this).data('amount'));
+      $('.wasBought').val($(this).data('wasBought')); }).on('click', '.remove',
+      function () { $('#removeproductModal').modal('show');
+      $('.product_id_removal').val($(this).data('id')); }); });
     </script>
   </body>
 

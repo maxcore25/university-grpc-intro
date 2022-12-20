@@ -18,15 +18,15 @@ const server = new grpc.Server();
 const customers = [
   {
     id: 'a68b823c-7ca6-44bc-b721-fb4d5312cafc',
-    name: 'Dichter Snus',
-    age: 300,
-    address: 5500,
+    name: 'Bread',
+    amount: 100,
+    wasBought: false,
   },
   {
     id: '34415c7c-f82d-4e44-88ca-ae2a1aaa92b7',
-    name: 'Etan Snus',
-    age: 3500,
-    address: 666,
+    name: 'Milk',
+    amount: 50,
+    wasBought: true,
   },
 ];
 
@@ -61,8 +61,8 @@ server.addService(customersProto.CustomerService.service, {
 
     if (existingCustomer) {
       existingCustomer.name = call.request.name;
-      existingCustomer.age = call.request.age;
-      existingCustomer.address = call.request.address;
+      existingCustomer.amount = call.request.amount;
+      existingCustomer.wasBought = call.request.wasBought;
       callback(null, existingCustomer);
     } else {
       callback({

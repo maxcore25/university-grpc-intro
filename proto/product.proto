@@ -13,8 +13,8 @@ message Empty {}
 message Customer {
     string id = 1;
     string name = 2;
-    int32 age = 3;
-    int32 address = 4;
+    int32 amount = 3;
+    bool wasBought = 4;
 }
 
 message CustomerList {

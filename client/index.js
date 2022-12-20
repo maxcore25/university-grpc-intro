@@ -25,8 +25,8 @@ app.get('/', (req, res) => {
 app.post('/save', (req, res) => {
   let newCustomer = {
     name: req.body.name,
-    age: req.body.age,
-    address: req.body.address,
+    amount: req.body.amount,
+    wasBought: req.body.wasBought,
   };
 
   client.insert(newCustomer, (err, data) => {
@@ -41,8 +41,8 @@ app.post('/update', (req, res) => {
   const updateCustomer = {
     id: req.body.id,
     name: req.body.name,
-    age: req.body.age,
-    address: req.body.address,
+    amount: req.body.amount,
+    wasBought: req.body.wasBought,
   };
 
   client.update(updateCustomer, (err, data) => {
@@ -62,7 +62,6 @@ app.post('/remove', (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log('Server running at port %d', PORT);
+app.listen(3000, () => {
+  console.log('Server running at http://localhost:3000');
 });
